@@ -19,12 +19,12 @@ public class SignupController {
     }
 
     @GetMapping()
-    public String getSignupPage(@ModelAttribute User user, Model model) {
+    public String getSignupPage(@ModelAttribute("newUser") User user, Model model) {
         return "signup";
     }
 
     @PostMapping()
-    public String signupUser(@ModelAttribute User user, Model model) {
+    public String signupUser(@ModelAttribute("newUser") User user, Model model) {
         String signupError = null;
 
         if (!userService.isUserNameAvailable(user.getUserName())) {
@@ -40,9 +40,10 @@ public class SignupController {
 
         if (signupError == null) {
             model.addAttribute("signupSuccess", true);
+            return "login";
         } else {
             model.addAttribute("signupError", signupError);
+            return "signup";
         }
-        return "signup";
     }
 }
