@@ -19,9 +19,9 @@ public class NotesController {
     public String createNote(@ModelAttribute Note note, Model model) {
         int rowsAdd = notesService.addNote(note);
         if(rowsAdd < 0) {
-            model.addAttribute("errorNote", "Error while creating note");
+            model.addAttribute("error", "Error while creating note");
         } else {
-            model.addAttribute("successNote", true);
+            model.addAttribute("success", true);
         }
         model.addAttribute("allNotes", this.notesService.getAllNotes());
         return "result";
@@ -32,9 +32,9 @@ public class NotesController {
         int rowDeleted = notesService.deleteNote(noteId);
 
         if (rowDeleted < 1) {
-            model.addAttribute("errorNote", "Error while deleting the note");
+            model.addAttribute("error", "Error while deleting the note");
         } else {
-            model.addAttribute("successNote", true);
+            model.addAttribute("success", true);
         }
         return "result";
     }
