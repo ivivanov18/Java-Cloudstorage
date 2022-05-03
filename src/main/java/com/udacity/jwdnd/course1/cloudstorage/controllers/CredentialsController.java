@@ -4,9 +4,7 @@ import com.udacity.jwdnd.course1.cloudstorage.models.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/credentials")
@@ -28,4 +26,14 @@ public class CredentialsController {
         return "result";
     }
 
+    @GetMapping("/delete/{credentialId}")
+    public String deleteCredential(@PathVariable("credentialId") Integer credentialId, Model model) {
+        int deletedRow = credentialsService.deleteCredential(credentialId);
+        if (deletedRow < 1) {
+            model.addAttribute("error", "Credential could not be deleted");
+        } else {
+            model.addAttribute("success", true);
+        }
+        return "result";
+    }
 }
