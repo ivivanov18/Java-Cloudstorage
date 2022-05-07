@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/files")
 public class FilesController {
-    private final static int MAX_ALLOWED_UPLOAD_SIZE_IN_BYTES = 1000000;
+    private final static int MAX_ALLOWED_UPLOAD_SIZE_IN_BYTES = 10000000;
     private final FilesService filesService;
 
     public FilesController(FilesService filesService) {
