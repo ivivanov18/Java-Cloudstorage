@@ -1,7 +1,9 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
 import com.udacity.jwdnd.course1.cloudstorage.models.File;
+import com.udacity.jwdnd.course1.cloudstorage.models.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
+import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,18 +11,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/files")
 public class FilesController {
     private final static int MAX_ALLOWED_UPLOAD_SIZE_IN_BYTES = 10000000;
     private final FilesService filesService;
+    private final UserService userService;
 
-    public FilesController(FilesService filesService) {
+    public FilesController(FilesService filesService, UserService userService) {
         this.filesService = filesService;
+        this.userService = userService;
     }
 
     @PostMapping
-    public String uploadFile(@ModelAttribute("newFile") MultipartFile file, Model model) {
+    public String uploadFile(@ModelAttribute("newFile") MultipartFile file, Principal principal, Model model) {
+        String userName = principal.getName();
+        User loggedUser = this.userService.getUser(userName);
+
         if (file.isEmpty()) {
             model.addAttribute("error", "File is empty and cannot be uploaded");
             return "result";
@@ -36,7 +45,7 @@ public class FilesController {
             return "result";
         }
 
-        int rowAdded = filesService.saveFile(file);
+        int rowAdded = filesService.saveFile(file, loggedUser.getUserId());
 
         if (rowAdded < 0) {
             model.addAttribute("error", "Could not upload file");

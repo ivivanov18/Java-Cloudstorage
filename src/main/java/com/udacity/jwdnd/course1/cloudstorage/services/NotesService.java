@@ -14,8 +14,8 @@ public class NotesService {
         this.noteMapper = noteMapper;
     }
 
-    public List<Note> getAllNotes() {
-        return noteMapper.getNotes();
+    public List<Note> getAllNotes(int userId) {
+        return noteMapper.getNotes(userId);
     }
 
     public Note getNoteById(Integer noteId) {

@@ -11,8 +11,8 @@ public interface FileMapper {
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
     int insert(File file);
 
-    @Select("SELECT fileid, filename FROM FILES")
-    List<File> getFiles();
+    @Select("SELECT fileid, filename FROM FILES WHERE userid=#{userId}")
+    List<File> getFiles(int userId);
 
     @Select("SELECT * FROM FILES WHERE filename=#{fileName}")
     File getFileByFileName(String fileName);

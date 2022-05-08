@@ -17,9 +17,9 @@ public class FilesService {
         this.fileMapper = fileMapper;
     }
 
-    public int saveFile(MultipartFile multipartFile) {
+    public int saveFile(MultipartFile multipartFile, int userId) {
         try {
-            File file = new File(null, multipartFile.getOriginalFilename(), multipartFile.getContentType(), multipartFile.getSize(), null, multipartFile.getBytes());
+            File file = new File(null, multipartFile.getOriginalFilename(), multipartFile.getContentType(), multipartFile.getSize(), userId, multipartFile.getBytes());
             return fileMapper.insert(file);
         } catch (IOException io) {
             return -1;
@@ -30,8 +30,8 @@ public class FilesService {
         return fileMapper.getFileByFileName(fileName) == null;
     }
 
-    public List<File> getAllFiles() {
-        return fileMapper.getFiles();
+    public List<File> getAllFiles(int userId) {
+        return fileMapper.getFiles(userId);
     }
 
     public int deleteFile(int fileId) {

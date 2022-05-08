@@ -16,8 +16,8 @@ public class CredentialsService {
         this.encryptionService = encryptionService;
     }
 
-    public List<Credential> getAllCredentials() {
-        return credentialMapper.getAllCredentials();
+    public List<Credential> getAllCredentials(int userId) {
+        return credentialMapper.getAllCredentials(userId);
     }
 
     public Credential getCredential(Integer credentialId) {
