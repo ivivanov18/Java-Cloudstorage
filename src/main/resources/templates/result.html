@@ -17,7 +17,8 @@
             <div th:if="${error}" class="alert alert-danger fill-parent">
                 <h1 class="display-5">Error</h1>
                 <span th:text="${error}"></span>
-                <span>Click <a th:href="@{/home}">here</a> to continue.</span>
+                <span th:if="${error == 'Forbidden.'}">Click <a th:href="@{/login}">here</a> to login.</span>
+                <span th:unless="${error == 'Forbidden.'}">Click <a th:href="@{/home}">here</a> to login.</span>
             </div>
         </div>
     </body>
