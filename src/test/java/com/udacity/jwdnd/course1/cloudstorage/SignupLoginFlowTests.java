@@ -32,6 +32,7 @@ public class SignupLoginFlowTests {
 
     @BeforeEach
     public void beforeEach() {
+        driver = new ChromeDriver();
         baseURL = "http://localhost:" + this.port;
     }
 
@@ -55,15 +56,15 @@ public class SignupLoginFlowTests {
     @Test
     public void accessingSignupWithoutLoggingShouldBePossible() {
         driver.get(baseURL + "/signup");
-        Assertions.assertEquals("Signup", driver.getTitle());
+        Assertions.assertEquals("Sign Up", driver.getTitle());
     }
 
     @Test
     public void homePageIsAccessibleForLoggedUserAndNotOnceLoggedOut () {
-        signupUser("luke", "skywalker", "jedi", "theforce");
+        signupUser("luke", "skywalker", "newhope", "theforce");
         Assertions.assertEquals("Login", driver.getTitle());
 
-        loginUser("jedi", "theforce");
+        loginUser("newhope", "theforce");
         Assertions.assertEquals("Home", driver.getTitle());
 
         logoutUser();
