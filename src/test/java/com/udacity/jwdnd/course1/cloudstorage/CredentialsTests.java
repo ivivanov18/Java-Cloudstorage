@@ -44,11 +44,11 @@ public class CredentialsTests {
 
         driver.get(baseURL + "/signup");
         SignupPage signupPage = new SignupPage(driver);
-        signupPage.signupUser("luke", "skywalker", "jedi", "theforce");
+        signupPage.signupUser("luke", "skywalker", "theone", "theforce");
 
         driver.get(baseURL + "/login");
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginUser("jedi", "theforce");
+        loginPage.loginUser("theone", "theforce");
 
         driver.get(baseURL + "/home");
         homePage = new HomePage(driver, new WebDriverWait(driver, 10));

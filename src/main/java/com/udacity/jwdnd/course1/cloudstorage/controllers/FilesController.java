@@ -36,7 +36,7 @@ public class FilesController {
         }
 
         if (file.getSize() > MAX_ALLOWED_UPLOAD_SIZE_IN_BYTES) {
-            model.addAttribute("error", "File size is larger than allowed");
+            model.addAttribute("error", "File size is larger than allowed size (" + String.valueOf(MAX_ALLOWED_UPLOAD_SIZE_IN_BYTES) + " bytes)");
             return "result";
         }
 

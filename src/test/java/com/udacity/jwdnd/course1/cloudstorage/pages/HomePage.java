@@ -150,6 +150,6 @@ public class HomePage {
         credentialPasswordInput = driver.findElement(By.id("credential-password"));
         wait.until(ExpectedConditions.visibilityOf(credentialPasswordInput));
         credentialPasswordInput.clear();
-        credentialPasswordInput.sendKeys(username);
+        credentialPasswordInput.sendKeys(password);
     }
 }
