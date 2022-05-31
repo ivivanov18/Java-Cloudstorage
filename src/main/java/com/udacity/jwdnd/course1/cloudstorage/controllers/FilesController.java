@@ -40,7 +40,7 @@ public class FilesController {
             return "result";
         }
 
-        if (!filesService.isFileNameAvailable(file.getName())) {
+        if (!filesService.isFileNameAvailable(file.getOriginalFilename(), loggedUser.getUserId())) {
             model.addAttribute("error", "Please retry. The file name is not available");
             return "result";
         }

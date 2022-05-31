@@ -26,8 +26,10 @@ public class FilesService {
         }
     }
 
-    public boolean isFileNameAvailable(String fileName) {
-        return fileMapper.getFileByFileName(fileName) == null;
+    public boolean isFileNameAvailable(String fileName, int userId) {
+        File file = fileMapper.getFileByFileNameUserId(fileName, userId);
+        boolean isAvailable = fileMapper.getFileByFileNameUserId(fileName, userId) == null;
+        return isAvailable;
     }
 
     public List<File> getAllFiles(int userId) {
