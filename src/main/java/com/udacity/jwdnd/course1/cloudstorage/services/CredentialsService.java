@@ -17,7 +17,12 @@ public class CredentialsService {
     }
 
     public List<Credential> getAllCredentials(int userId) {
-        return credentialMapper.getAllCredentials(userId);
+        List<Credential> credentials = credentialMapper.getAllCredentials(userId);
+
+        for (Credential credential: credentials) {
+            credential.setDecryptedPassword(this.encryptionService.decryptValue(credential.getPassword(), credential.getKey()));
+        }
+        return credentials;
     }
 
     public Credential getCredential(Integer credentialId) {
